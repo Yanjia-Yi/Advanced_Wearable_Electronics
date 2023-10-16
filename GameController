@@ -3,7 +3,7 @@
 #define DEBOUNCE 100  // delay for ensuring that the button presses do not overlap
 
 
-// Variables that won't change
+// Variables that won't change 
 
 const int buttonPin1 = 3;
 const int buttonPin2 = 2;
