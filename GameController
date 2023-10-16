@@ -1,10 +1,3 @@
-/* DIGF-3010 Advanced Wearables 2023
-  Kate Hartman
-  4 digital inputs to activate 4 keyboard keys
-  no resistor needed
-  Based on Keyboard library examples
- */
-
 #include "Keyboard.h"
 
 #define DEBOUNCE 100  // delay for ensuring that the button presses do not overlap
@@ -53,24 +46,28 @@ void loop() {
   buttonValue4 = digitalRead(buttonPin4);
 
   // use the button values to control  keyboard
+  //UP
   if (buttonValue1 == LOW) {
     Keyboard.press(keyboardKey1);
     Serial.println("Button 1 pressed");
     delay(100);
     Keyboard.release(keyboardKey1);
   }
+  //DOWN
   if (buttonValue2 == LOW) {
     Keyboard.press(keyboardKey2);
     Serial.println("Button 2 pressed");
     delay(100);
     Keyboard.release(keyboardKey2);
   }
+  //LEFT
   if (buttonValue3 == LOW) {
     Keyboard.press(keyboardKey3);
     Serial.println("Button 3 pressed");
     delay(100);
     Keyboard.release(keyboardKey3);
   }
+  //RIGHT
   if (buttonValue4 == LOW) {
     Keyboard.press(keyboardKey4);
     Serial.println("Button 4 pressed");
