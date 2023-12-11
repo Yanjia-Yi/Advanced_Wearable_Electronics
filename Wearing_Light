@@ -1,0 +1,100 @@
+#include <Adafruit_NeoPixel.h>
+//Light Spectrespecs
+//Neopixels light up triggered by the sound sensor
+// The digital pin used to receive sensor signal
+int sensorPin = 1;
+// The digital pin used to control the pixel strip
+int pinNumber0 = 9;//L_Hand
+int pinNumber1 = 6;//L_Ring
+int pinNumber2 = 10;//R_Hand
+int pinNumber3 = 12;//R_Ring
+// The number of pixels in the strip
+int numberOfPixels0 = 13;
+int numberOfPixels1 = 16;
+int numberOfPixels2 = 13;
+int numberOfPixels3 = 16;
+Adafruit_NeoPixel strip0 = Adafruit_NeoPixel(numberOfPixels0, pinNumber0, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numberOfPixels1, pinNumber1, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(numberOfPixels2, pinNumber2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(numberOfPixels3, pinNumber3, NEO_GRB + NEO_KHZ800);
+boolean val = 0;
+
+void setup() {
+  pinMode(sensorPin, INPUT);
+  pinMode(pinNumber0, OUTPUT);
+  pinMode(pinNumber1, OUTPUT);
+  pinMode(pinNumber2, OUTPUT);
+  pinMode(pinNumber3, OUTPUT);
+  // initialize pixel strip 
+  strip0.begin();
+  strip1.begin();
+  strip2.begin();
+  strip3.begin();
+  // set pixels to off to begin 
+  strip0.show();
+  strip1.show();
+  strip2.show();
+  strip3.show();
+  // initialize serial
+  Serial.begin(9600);
+}
+
+void loop() {
+  val = digitalRead(sensorPin);
+  Serial.println (val);
+  // when the sensor detects a signal above the threshold value, Neopixels light
+  if (val==HIGH) {
+    //L_Hand Blue
+    for(int i=0; i<numberOfPixels0; i++)
+    {
+      strip0.setPixelColor(i, 0, 0, 255); 
+    }
+    
+    //L_Ring Pink
+    for(int j=0; j<numberOfPixels1; j++)
+    {
+      strip1.setPixelColor(j, 255, 51, 153); 
+    }
+
+    //R_Hand Pink
+    for(int k=0; k<numberOfPixels2; k++)
+    {
+      strip2.setPixelColor(k, 255, 51, 153); 
+    }
+
+    //R_Ring Blue
+    for(int l=0; l<numberOfPixels3; l++)
+    {
+      strip3.setPixelColor(l, 0, 0, 255); 
+    }
+      strip0.show();
+      strip1.show();
+      strip2.show();
+      strip3.show();
+      delay(1000);
+  }
+  if (val==LOW) {
+    for(int i=0; i<numberOfPixels0; i++)
+    {
+      strip0.setPixelColor(i, 0, 0, 0); 
+    }
+    for(int j=0; j<numberOfPixels1; j++)
+    {
+      strip1.setPixelColor(j, 0, 0, 0);
+    }
+    for(int k=0; k<numberOfPixels2; k++)
+    {
+      strip2.setPixelColor(k, 0, 0, 0); 
+    }
+    for(int l=0; l<numberOfPixels3; l++)
+    {
+      strip3.setPixelColor(l, 0, 0, 0); 
+    }
+      strip0.show();
+      strip1.show();
+      strip2.show();
+      strip3.show();
+      delay(1000);
+  }
+  
+}
